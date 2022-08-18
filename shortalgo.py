@@ -204,7 +204,7 @@ while counter == 20:
                     file = open('jsonshort.json', 'w+')
                     buydata = { "contract": symbol, "amount": amount, "halfsies": halfsies }
                     json.dump(buydata, file)
-                    kucoin_futures.create_order(symbol, "limit", "buy", halfsies, 0.98*float(price["info"]["price"]), {'leverage': 5})
+                    ku.create_order(symbol, "limit", "buy", halfsies, 0.98*float(price["info"]["price"]), {'leverage': 5})
 
 
                 elif secondresult.iloc[-1] == secondresult.iloc[-2]:
