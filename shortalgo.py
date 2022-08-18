@@ -55,7 +55,7 @@ halfsies = 0
 while counter == 20:
     if position == False:
         for symbol in symbols:
-                since2 = ku.milliseconds () - 720000000
+                since2 = ku.milliseconds () - 400000000
                 ohlcv = ku.fetchOHLCV(symbol, timeframe='1h', since=since2) 
                 x = pd.DataFrame(ohlcv)
                 x.columns = ["Time", "Open", "High", "Low", "Close", "V"]
@@ -72,7 +72,7 @@ while counter == 20:
                 sma = ta.trend.SMAIndicator(close=closer, window=40).sma_indicator()
                 secondresult = y-z
                 thirdresult = secondresult[:-1]
-                hundredsma = ta.trend.SMAIndicator(close=closer, window=40).sma_indicator()
+                hundredsma = ta.trend.SMAIndicator(close=closer, window=100).sma_indicator()
                 fourthresult = thirdresult[:-1]
                 smaresult = sma.iloc[-1]
                 characters = '/USDT:USDT'
