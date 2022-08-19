@@ -112,11 +112,12 @@ while counter == 20:
                     print(f'SHORTSHORTSHORT {symbol}')
                     firstrestultbuy = secondresult.iloc[-1]
                     position = True
+                    ncome = (ku.fetchBalance()["info"]["data"]["positionMargin"])*.98
+                    time.sleep(5)
                     price = ku.fetchTicker(symbol)
                     print(price["info"]["price"])
                     #Figure the amount for each symbol - Fucking 8 if statements again
                     time.sleep(5)
-                    income = 610
                     amount = math.floor(((math.floor((income/float(price["info"]["price"]))*1000))/1000)*100)
                     print(amount)
                     params = {
