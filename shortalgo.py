@@ -7,6 +7,16 @@ from datetime import datetime
 import pickle
 import math
 import json
+import requests
+import requests
+
+
+def send(text):
+    token = '5782828239:AAE1H6hkzIJOjSvNCsnZ6bGYPTQX8yawQ3g'
+    your_id = '5315858757'
+    params = {'chat_id': your_id, 'text': text, 'parse_mode': 'HTML'}
+    resp = requests.post('https://api.telegram.org/bot{}/sendMessage'.format(token), params)
+    resp.raise_for_status()
 
 
 # import http.client, urllib.request, urllib.parse, urllib.error
@@ -33,6 +43,7 @@ if filedump["amount"] == 0:
 else:
     position = True
     print("True")
+
 
 
 symbols = ["BCH/USDT:USDT", "XRP/USDT:USDT", "ETH/USDT:USDT", "ETC/USDT:USDT", 'BTC/USDT:USDT', "SOL/USDT:USDT", 'APE/USDT:USDT', "MATIC/USDT:USDT", "BNB/USDT:USDT", "AVAX/USDT:USDT"]
@@ -110,6 +121,7 @@ while counter == 20:
                     xxx+=1
                 if xxx==6:
                     print(f'SHORTSHORTSHORT {symbol}')
+                    send(f'Short {symbol}!')
                     firstrestultbuy = secondresult.iloc[-1]
                     position = True
                     ncome = (ku.fetchBalance()["info"]["data"]["positionMargin"])*.98
