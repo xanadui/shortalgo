@@ -250,7 +250,7 @@ while counter == 20:
             z = ta.trend.EMAIndicator(close=closer, window=26).ema_indicator()
             sma = ta.trend.SMAIndicator(close=closer, window=40).sma_indicator()
             secondresult = y-z
-            thirdresult = secondresult[:-1]
+            thirdresult = secondresult
             fourthresult = thirdresult[:-1]
             smaresult = sma.iloc[-1]
             price = ku.fetchTicker(contract)
