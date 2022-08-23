@@ -206,7 +206,7 @@ while counter == 20:
                     buydata = { "contract": symbol, "amount": amount, "halfsies": halfsies }
                     time.sleep(15)
                     json.dump(buydata, file)
-                    ku.createOrder(symbol, "limit", "buy", halfsies, 0.98*float(price["info"]["price"]), {'leverage': 5})
+                    takeprofitorder = ku.createOrder(symbol, "limit", "buy", halfsies, 0.98*float(price["info"]["price"]), {'leverage': 5})
 
 
                 elif secondresult.iloc[-1] == secondresult.iloc[-2]:
@@ -257,6 +257,8 @@ while counter == 20:
 
             if thirdresult.iloc[-1] > fourthresult.iloc[-1]:
                 send(f'CLOSING SHORT on {symbol}!')
+                canceled = ku.cancel_order(takeprofitorder['id'], takeprofitorder['symbol'])
+                time.skeep(10)
                 sellorder = ku.createOrder(contract, 'limit', 'buy', amount-halfsies, float(price['info']['price'])*1.0003, {'leverage': 5})
                 time.sleep(15)
                 if ku.fetchBalance()["info"]["data"]["positionMargin"] > 1:
