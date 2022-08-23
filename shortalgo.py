@@ -262,6 +262,7 @@ while counter == 20:
                 sellorder = ku.createOrder(contract, 'limit', 'buy', amount-halfsies, float(price['info']['price'])*1.0003, {'leverage': 5})
                 time.sleep(15)
                 if ku.fetchBalance()["info"]["data"]["positionMargin"] > 1:
+                    send(f'Exiting Halfsies on {symbol}')
                     sellordertoo = ku.createOrder(contract, 'limit', 'buy', amount - (amount-halfsies), float(price['info']['price'])*1.0003, {'leverage': 5})
                 else:
                     pass
