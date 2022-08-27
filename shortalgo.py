@@ -76,12 +76,12 @@ while counter == 20:
                 closer = closer[:-1]
                 higher = higher[:-1]
                 lower = lower[:-1]
-                opener = opener
+                opener = opener[:-1]
                 y = ta.trend.EMAIndicator(close=closer, window=12).ema_indicator()
                 z = ta.trend.EMAIndicator(close=closer, window=26).ema_indicator()
                 sma = ta.trend.SMAIndicator(close=closer, window=40).sma_indicator()
                 secondresult = y-z
-                thirdresult = secondresult
+                thirdresult = secondresult[:-1]
                 hundredsma = ta.trend.SMAIndicator(close=closer, window=100).sma_indicator()
                 fourthresult = thirdresult[:-1]
                 smaresult = sma.iloc[-1]
