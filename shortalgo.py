@@ -45,7 +45,7 @@ else:
 
 
 
-symbols = ["MATIC/USDT:USDT", "BCH/USDT:USDT", "XRP/USDT:USDT", "ETH/USDT:USDT", "ETC/USDT:USDT", 'BTC/USDT:USDT', "SOL/USDT:USDT", 'APE/USDT:USDT', "BNB/USDT:USDT", "AVAX/USDT:USDT"]
+symbols = ["MATIC/USDT:USDT", "BCH/USDT:USDT", "XRP/USDT:USDT", "ETH/USDT:USDT", "ETC/USDT:USDT", 'BTC/USDT:USDT', "SOL/USDT:USDT", 'APE/USDT:USDT', "AVAX/USDT:USDT"]
 counter = 20
 firstresultbuyBTC = 1000000
 firstresultbuyETH = 1000000
@@ -81,7 +81,7 @@ while counter == 20:
                 z = ta.trend.EMAIndicator(close=closer, window=26).ema_indicator()
                 sma = ta.trend.SMAIndicator(close=closer, window=40).sma_indicator()
                 secondresult = y-z
-                thirdresult = secondresult[:-1]
+                thirdresult = secondresult
                 hundredsma = ta.trend.SMAIndicator(close=closer, window=100).sma_indicator()
                 fourthresult = thirdresult[:-1]
                 smaresult = sma.iloc[-1]
@@ -125,7 +125,7 @@ while counter == 20:
                     send(f'Short {symbol}!')
                     firstrestultbuy = secondresult.iloc[-1]
                     position = True
-                    income = 660
+                    income = 619
                     time.sleep(10)
                     price = ku.fetchTicker(symbol)
                     print(price["info"]["price"])
