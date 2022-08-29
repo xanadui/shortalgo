@@ -125,7 +125,7 @@ while counter == 20:
                     send(f'Short {symbol}!')
                     firstrestultbuy = secondresult.iloc[-1]
                     position = True
-                    income = (ku.fetchBalance()['info']['data']["marginBalance"]*0.987)*5
+                    income = (ku.fetchBalance()['info']['data']["marginBalance"]*0.98)*5
                     time.sleep(10)
                     price = ku.fetchTicker(symbol)
                     print(price["info"]["price"])
