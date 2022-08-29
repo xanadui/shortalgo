@@ -259,13 +259,13 @@ while counter == 20:
             price = ku.fetchTicker(contract)
 
             if thirdresult.iloc[-1] > fourthresult.iloc[-1]:
-                send(f'CLOSING SHORT on {symbol}!')
+                send(f'CLOSING SHORT on {contract}!')
                 canceled = ku.cancel_order(takeprofitorder['id'], takeprofitorder['symbol'])
                 time.skeep(10)
                 sellorder = ku.createOrder(contract, 'limit', 'buy', amount-halfsies, float(price['info']['price'])*1.0003, {'leverage': 5})
                 time.sleep(15)
                 if ku.fetchBalance()["info"]["data"]["positionMargin"] > 1:
-                    send(f'Exiting Halfsies on {symbol}')
+                    send(f'Exiting Halfsies on {contract}')
                     sellordertoo = ku.createOrder(contract, 'limit', 'buy', amount - (amount-halfsies), float(price['info']['price'])*1.0003, {'leverage': 5})
                 else:
                     pass
