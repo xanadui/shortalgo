@@ -280,7 +280,7 @@ while counter == 20:
                 send(f'CLOSING SHORT on {contract}!')
                 canceled = ku.cancel_order(takeprofitorder['id'], takeprofitorder['symbol'])
                 time.sleep(5)
-                secondcanceled = ku.cancel_order(secondtakeprofitorder['id'], secondtakeprofitorder['symbol']
+                secondcanceled = ku.cancel_order(secondtakeprofitorder['id'], secondtakeprofitorder['symbol'])
                 time.sleep(10)
                 sellorder = ku.createOrder(contract, 'limit', 'buy', amount-(2*halfsies), float(price['info']['price'])*1.0003, {'leverage': 5})
                 price = ku.fetchTicker(contract)
