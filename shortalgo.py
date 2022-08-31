@@ -61,7 +61,8 @@ firstsmabuy = 1000000000
 firstsmasell = -10000000000
 amount = 0
 halfsies = 0
-
+firsttp = 0
+secondtp = 0
 while counter == 20:
     if position == False:
         for symbol in symbols:
@@ -138,7 +139,7 @@ while counter == 20:
                             time.sleep(10)
                             amount = (math.floor(income/float(price['info']['price'])*10000)/10000)*1000
                             order = ku.createOrder('BTC/USDT:USDT', 'limit', 'sell', amount, float(price['info']['price'])*.9997, {'leverage': 5})
-                            halfsies = (math.floor((0.5*income)/float(price['info']['price'])*10000)/10000)*1000
+                            halfsies = (math.floor((0.3*income)/float(price['info']['price'])*10000)/10000)*1000
                             # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*10000)/10000)*1000, None, {'stopPrice': 0.98*price, 'leverage': 5})
                             # tp = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*10000)/10000)*1000, None, {'stopPrice': 1.02*price, 'leverage': 5})
 
@@ -146,35 +147,35 @@ while counter == 20:
                             time.sleep(10)
                             amount = (math.floor(income/float(price['info']['price'])*1000)/1000)*100
                             order = ku.createOrder(symbol, 'limit', 'sell', amount, float(price['info']['price'])*.9997, {'leverage': 5})
-                            halfsies = (math.floor((0.5*income)/float(price['info']['price'])*1000)/1000)*100
+                            halfsies = (math.floor((0.3*income)/float(price['info']['price'])*1000)/1000)*100
                             # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*1000)/1000)*100, None, {'stopPrice': 0.98*price, 'leverage': 5})
                             # tp = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*1000)/1000)*100, None, {'stopPrice': 1.02*price, 'leverage': 5})
                         elif symbol == "SOL/USDT:USDT":    
                             time.sleep(10)
                             amount = (math.floor(income/float(price['info']['price'])*100)/100)*10
                             order = ku.createOrder(symbol, 'limit', 'sell', amount, float(price['info']['price'])*.9997, {'leverage': 5})
-                            halfsies = (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10
+                            halfsies = (math.floor((0.3*income)/float(price['info']['price'])*100)/100)*10
                             # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 0.98*price,'leverage': 5})
                             # tp = ku.create_order(symbol, 'market', 'sell',  (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 1.02*price,'leverage': 5})
                         elif symbol == "XRP/USDT:USDT":
                             time.sleep(10)
                             amount = (math.floor((income/(float(price['info']['price'])))))/10
                             order = ku.createOrder(symbol, 'limit', 'sell', amount, float(price['info']['price'])*.9997, {'leverage': 5})
-                            halfsies = (math.floor(((0.5*income)/float(price['info']['price']))))/10
+                            halfsies = (math.floor(((0.3*income)/float(price['info']['price']))))/10
                             # sl = ku.create_order(symbol, 'market', 'sell', (math.floor(((0.5*income)/price['info']['price'])))/10, None, {'stopPrice': 0.98*price,'leverage': 5})
                             # tp = ku.create_order(symbol, 'market', 'sell',  (math.floor(((0.5*income)/price['info']['price'])))/10, None, {'stopPrice': 1.02*price,'leverage': 5})
                         elif symbol == 'APE/USDT:USDT':
                             time.sleep(10)
                             amount = (math.floor(income/float(price['info']['price'])*100)/100)*10
                             order = ku.createOrder(symbol, 'limit', 'sell', amount, float(price['info']['price'])*.9997, {'leverage': 5})
-                            halfsies = (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10
+                            halfsies = (math.floor((0.3*income)/float(price['info']['price'])*100)/100)*10
                             # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 0.98*price,'leverage': 5})
                             # tp = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 1.02*price,'leverage': 5})
                         elif symbol == "MATIC/USDT:USDT":
                             time.sleep(10)
                             amount = (math.floor((income/float(price['info']['price']))))/10
                             order = ku.createOrder(symbol, 'limit', 'sell', amount, float(price['info']['price'])*.9997, {'leverage': 5})
-                            halfsies = (math.floor(((0.5*income)/price['info']['price'])))/10
+                            halfsies = (math.floor(((0.3*income)/price['info']['price'])))/10
                             # sl = ku.create_order(symbol, 'market', 'sell', (math.floor(((0.5*income)/price['info']['price'])))/10, None, {'stopPrice': 0.98*price,'leverage': 5})
                             # tp = ku.create_order(symbol, 'market', 'sell',  (math.floor(((0.5*income)/price['info']['price'])))/10, None, {'stopPrice': 1.02*price,'leverage': 5})
 
@@ -182,14 +183,14 @@ while counter == 20:
                             time.sleep(10)
                             amount = ((math.floor((income/float(price['info']['price']))*1000)/1000)*100)
                             order = ku.createOrder(symbol, 'limit', 'sell', amount, price['info']['price']*.9997, {'leverage': 5})
-                            halfsies = (math.floor((0.5*income)/float(price['info']['price'])*1000)/1000)*100
+                            halfsies = (math.floor((0.3*income)/float(price['info']['price'])*1000)/1000)*100
                             # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*1000)/1000)*100, None, {'stopPrice': 0.98*price,'leverage': 5})
                             # tp = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*1000)/1000)*100, None, {'stopPrice': 1.02*price,'leverage': 5})
                         elif symbol == "ETC/USDT:USDT":
                             time.sleep(10)
                             amount = (math.floor((income/float(price['info']['price']))*100)/100)*10
                             order = ku.createOrder(symbol, 'limit', 'sell', amount, float(price['info']['price'])*.9997, {'leverage': 5})
-                            halfsies = (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10
+                            halfsies = (math.floor((0.3*income)/float(price['info']['price'])*100)/100)*10
                             # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 0.98*price,'leverage': 5})
                             # tp = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 1.02*price,'leverage': 5})                        
 
@@ -197,7 +198,7 @@ while counter == 20:
                             time.sleep(10)
                             amount = (math.floor((income/float(price['info']['price']))*100)/100)*10
                             order = ku.createOrder(symbol, 'limit', 'sell', amount, float(price['info']['price'])*.9997, {'leverage': 5})
-                            halfsies = (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10
+                            halfsies = (math.floor((0.3*income)/float(price['info']['price'])*100)/100)*10
                             # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 0.98*price,'leverage': 5})
                             # tp = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 1.02*price,'leverage': 5})                        
                     except:
@@ -209,7 +210,24 @@ while counter == 20:
                     buydata = { "contract": symbol, "amount": amount, "halfsies": halfsies }
                     time.sleep(15)
                     json.dump(buydata, file)
-                    takeprofitorder = ku.createOrder(symbol, "limit", "buy", halfsies, 0.98*float(price["info"]["price"]), {'leverage': 5})
+                    while firsttp<1:
+                        try:
+                            takeprofitorder = ku.createOrder(symbol, "limit", "buy", halfsies, 0.99*float(price["info"]["price"]), {'leverage': 5})
+                            firsttp+=1
+                            time.sleep(20)
+                            send("First tp Worked!!")
+                        except:
+                            time.sleep(20)
+                            send("First tp didn't work but trying again")
+                    while secondtp<1:
+                        try:
+                            secondtakeprofitorder = ku.createOrder(symbol, "limit", "buy", halfsies, 0.98*float(price["info"]["price"]), {'leverage': 5})
+                            secondtp+=1
+                            send("Second tp Worked!")
+                        except:
+                            time.sleep(20)
+                            send("Second tp didn't work, trying again tho")
+                    
 
 
                 elif secondresult.iloc[-1] == secondresult.iloc[-2]:
@@ -261,14 +279,22 @@ while counter == 20:
             if thirdresult.iloc[-1] > fourthresult.iloc[-1]:
                 send(f'CLOSING SHORT on {contract}!')
                 canceled = ku.cancel_order(takeprofitorder['id'], takeprofitorder['symbol'])
-                time.skeep(10)
+                time.sleep(5)
+                secondcanceled = ku.cancel_order(secondtakeprofitorder['id'], secondtakeprofitorder['symbol']
+                time.sleep(10)
                 sellorder = ku.createOrder(contract, 'limit', 'buy', amount-halfsies, float(price['info']['price'])*1.0003, {'leverage': 5})
+                price = ku.fetchTicker(contract)
                 time.sleep(15)
                 if ku.fetchBalance()["info"]["data"]["positionMargin"] > 1:
                     send(f'Exiting Halfsies on {contract}')
-                    sellordertoo = ku.createOrder(contract, 'limit', 'buy', amount - (amount-halfsies), float(price['info']['price'])*1.0003, {'leverage': 5})
+                    sellordertoo = ku.createOrder(contract, 'limit', 'buy', halfsies, float(price['info']['price'])*1.0003, {'leverage': 5})
                 else:
                     pass
+                time.sleep(10)
+                if ku.fetchBalance()["info"]["data"]["positionMargin"] > 1:
+                    send(f'Exiting Halfsies AGAIN on {contract}')
+                    sellordertwice = ku.createOrder(contract, 'limit', 'buy', halfsies, float(price['info']['price'])*1.0003, {'leverage': 5})
+                
                 
                 file = open('jsonshort.json', 'w+')
                 data = { "contract": "none", "amount": 0, "halfsies": 0}
