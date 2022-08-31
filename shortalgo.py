@@ -294,7 +294,7 @@ while counter == 20:
                 if ku.fetchBalance()["info"]["data"]["positionMargin"] > 1:
                     send(f'Exiting Halfsies AGAIN on {contract}')
                     sellordertwice = ku.createOrder(contract, 'limit', 'buy', halfsies, float(price['info']['price'])*1.0003, {'leverage': 5})
-                 else:
+                else:
                     pass
                 
                 file = open('jsonshort.json', 'w+')
