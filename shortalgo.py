@@ -282,7 +282,7 @@ while counter == 20:
                 time.sleep(5)
                 secondcanceled = ku.cancel_order(secondtakeprofitorder['id'], secondtakeprofitorder['symbol']
                 time.sleep(10)
-                sellorder = ku.createOrder(contract, 'limit', 'buy', amount-halfsies, float(price['info']['price'])*1.0003, {'leverage': 5})
+                sellorder = ku.createOrder(contract, 'limit', 'buy', amount-(2*halfsies), float(price['info']['price'])*1.0003, {'leverage': 5})
                 price = ku.fetchTicker(contract)
                 time.sleep(15)
                 if ku.fetchBalance()["info"]["data"]["positionMargin"] > 1:
@@ -294,7 +294,8 @@ while counter == 20:
                 if ku.fetchBalance()["info"]["data"]["positionMargin"] > 1:
                     send(f'Exiting Halfsies AGAIN on {contract}')
                     sellordertwice = ku.createOrder(contract, 'limit', 'buy', halfsies, float(price['info']['price'])*1.0003, {'leverage': 5})
-                
+                 else:
+                    pass
                 
                 file = open('jsonshort.json', 'w+')
                 data = { "contract": "none", "amount": 0, "halfsies": 0}
@@ -304,6 +305,4 @@ while counter == 20:
                 break
             else:
                 print("Uh oh not yet buddy")
-                time.sleep(100)
-
-
+                time.sleep(100)                                         
