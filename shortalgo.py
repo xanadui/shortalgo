@@ -203,6 +203,7 @@ while counter == 20:
                             # tp = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 1.02*price,'leverage': 5})                        
                     except:
                         send("manual trade it")
+                        order = ku.createOrder(symbol, 'limit', 'sell', amount, float(price['info']['price'])*.9997, {'leverage': 5})
                     print(amount)
                     position = True
                     pos = symbol
