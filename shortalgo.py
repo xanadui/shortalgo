@@ -63,6 +63,7 @@ amount = 0
 halfsies = 0
 firsttp = 0
 secondtp = 0
+firsttraderboy = 0
 while counter == 20:
     if position == False:
         for symbol in symbols:
@@ -122,6 +123,7 @@ while counter == 20:
                 if hundredsma.iloc[-1] > smaresult:
                     xxx+=1
                 if xxx==6:
+                    while firsttraderboy < 1
                     print(f'SHORTSHORTSHORT {symbol}')
                     send(f'Short {symbol}!')
                     firstrestultbuy = secondresult.iloc[-1]
@@ -201,7 +203,9 @@ while counter == 20:
                             halfsies = (math.floor((0.3*income)/float(price['info']['price'])*100)/100)*10
                             # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 0.98*price,'leverage': 5})
                             # tp = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 1.02*price,'leverage': 5})                        
+                        firsttraderboy +=1
                     except:
+                        time.sleep(15)
                         send("manual trade it")
                     print(amount)
                     position = True
