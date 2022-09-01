@@ -45,7 +45,7 @@ else:
 
 
 
-symbols = ["XRP/USDT:USDT", "BCH/USDT:USDT", "MATIC/USDT:USDT", "XRP/USDT:USDT", "ETH/USDT:USDT", "ETC/USDT:USDT", 'BTC/USDT:USDT', "SOL/USDT:USDT", 'APE/USDT:USDT', "AVAX/USDT:USDT"]
+symbols = ["BCH/USDT:USDT", "XRP/USDT:USDT", "MATIC/USDT:USDT", "XRP/USDT:USDT", "ETH/USDT:USDT", "ETC/USDT:USDT", 'BTC/USDT:USDT', "SOL/USDT:USDT", 'APE/USDT:USDT', "AVAX/USDT:USDT"]
 counter = 20
 firstresultbuyBTC = 1000000
 firstresultbuyETH = 1000000
@@ -196,7 +196,7 @@ while counter == 20:
                         price = ku.fetchTicker(symbol)
                         time.sleep(20)
                         amount = ((math.floor((income/float(price['info']['price']))*1000)/1000)*100)
-                        order = ku.createOrder(symbol, 'limit', 'sell', amount, price['info']['price']*.9997, {'leverage': 5})
+                        order = ku.createOrder(symbol, 'limit', 'sell', amount, float(price['info']['price'])*.9997, {'leverage': 5})
                         halfsies = (math.floor((0.3*income)/float(price['info']['price'])*1000)/1000)*100
                         # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*1000)/1000)*100, None, {'stopPrice': 0.98*price,'leverage': 5})
                         # tp = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*1000)/1000)*100, None, {'stopPrice': 1.02*price,'leverage': 5})
