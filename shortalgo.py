@@ -296,13 +296,25 @@ while counter == 20:
                 send(f'CLOSING SHORT on {contract}!')
                 price = ku.fetchTicker(contract)
                 time.sleep(20)
-                sellorder = ku.createOrder(contract, 'limit', 'buy', amount-(2*halfsies), float(price['info']['price'])*1.0003, {'leverage': 5})
+                firstsale=0
+                while firstsale <1:
+                    try:
+                        sellorder = ku.createOrder(contract, 'limit', 'buy', amount-(2*halfsies), float(price['info']['price'])*1.0003, {'leverage': 5})
+                        firstsale+=1
+                    except:
+                        time.sleep(30)
                 time.sleep(20)
                 if ku.fetchBalance()["info"]["data"]["positionMargin"] > 1:
                     send(f'Exiting Halfsies on {contract}')
                     price = ku.fetchTicker(contract)
                     time.sleep(20)
-                    sellordertoo = ku.createOrder(contract, 'limit', 'buy', halfsies, float(price['info']['price'])*1.0003, {'leverage': 5})
+                    sellsecond = 0
+                    while sellsecond<1:
+                        try:
+                            sellordertoo = ku.createOrder(contract, 'limit', 'buy', halfsies, float(price['info']['price'])*1.0003, {'leverage': 5})
+                            sellsecond+=1
+                        except:
+                            time.sleep(30)
                 else:
                     pass
                 time.sleep(15)
@@ -310,7 +322,15 @@ while counter == 20:
                     send(f'Exiting Halfsies AGAIN on {contract}')
                     price = ku.fetchTicker(contract)
                     time.sleep(20)
-                    sellordertwice = ku.createOrder(contract, 'limit', 'buy', halfsies, float(price['info']['price'])*1.0003, {'leverage': 5})
+                    againsell = 0
+                    while againsell<1:
+                        try:
+                            sellordertwice = ku.createOrder(contract, 'limit', 'buy', halfsies, float(price['info']['price'])*1.0003, {'leverage': 5})
+                            againsell +=1
+                        except:
+                            time.sleep(30)
+                            price = ku.fetchTicker(contract)
+
                 else:
                     pass
                 
