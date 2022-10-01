@@ -23,18 +23,18 @@ def send(text):
 
 ku = ccxt.kucoinfutures({
     'adjustForTimeDifference': True,
-    "apiKey": '633054c847df220001d99764',
-    "secret": 'aaf9fd98-6ee1-489a-8461-cb8137ec2544',
+    "apiKey": '62ec3e0b6a55680001b9c7c1',
+    "secret": 'f8a6306e-05be-4f63-bc90-4981ed43a5bc',
     "password":'Krish005'
 });
 
-# file = open('jsonshort.json', 'w+')
+# file = open('jsondump.json', 'w+')
 # data = { "contract": "none", "amount": 0, "halfsies": 0}
 # json.dump(data, file)
 
 counter = 20
 while counter == 20:
-    file = open('jsonshort.json', 'r')
+    file = open('jsondump.json', 'r')
     filedump = json.load(file)
     if filedump["amount"] == 0:
         position = False
@@ -79,6 +79,7 @@ while counter == 20:
                 secondresult = y-z
                 thirdresult = secondresult
                 fourthresult = thirdresult[:-1]
+                smaresult = sma.iloc[-1]
                 smaresult = ta.trend.SMAIndicator(close=closer, window=40).sma_indicator()
                 hundredsma = ta.trend.SMAIndicator(close=closer, window=100).sma_indicator()
                 characters = '/USDT:USDT'
@@ -101,7 +102,11 @@ while counter == 20:
                 elif symbol == "AVAX/USDT:USDT":
                     newname = 'AVAX'
                 xxx=0
-                if thirdresult.iloc[-1] < fourthresult.iloc[-1]:
+                if opener.iloc[-1] < closer.iloc[-1]:
+                    r = -1
+                else:
+                    r=1
+                if thirdresult.iloc[-1] > fourthresult.iloc[-1]:
                     xxx+=1
                 if (smaresult.iloc[-1] > lower.iloc[-1]):
                     xxx+=1
@@ -112,17 +117,19 @@ while counter == 20:
                 if ku.fetchBalance()['info']['data']['positionMargin'] < 2:
                     time.sleep(3)
                     xxx+=1
-                if float(smaresult.iloc[-1]) > float(smaresult.iloc[-2]):
-                    xxx+=1
                 if float(hundredsma.iloc[-1]) > float(hundredsma.iloc[-2]):
                     xxx+=1
+                if smaresult.iloc[-1] < hundredsma.iloc[-1]:
+                    xxx+=1
+                if float(smaresult.iloc[-1]) > float(smaresult.iloc[-2]):
+                    xxx+=1                
                 if lower.iloc[-1]*1.015>=closer.iloc[-1] or lower.iloc[-1]*1.015>=opener.iloc[-1]:
                     xxx+=1
                 if (higher.iloc[-1]/1.015)<=closer.iloc[-1] or (higher.iloc[-1]/1.015)<=opener.iloc[-1]:
                     xxx+=1
-                if xxx==8:
-                    print(f'SHORTSHORTSHORT {symbol}')
-                    send(f'SHORT {symbol}!')
+                if xxx==9:
+                    print(f'BUYBUYBUY {symbol}')
+                    send(f'BUY {symbol}!')
                     firstrestultbuy = secondresult.iloc[-1]
                     position = True
                     income = (ku.fetchBalance()['info']['data']["marginBalance"]*0.98)*5
@@ -137,7 +144,7 @@ while counter == 20:
                                 time.sleep(10)
                                 price = ku.fetchTicker(symbol)
                                 time.sleep(30)
-                                order = ku.createOrder('BTC/USDT:USDT', 'limit', 'sell', ((math.floor(income/float(price['info']['price'])*10000))/10000)*1000, float(price['info']['price'])*1.0003, {'leverage': 5})
+                                order = ku.createOrder('BTC/USDT:USDT', 'limit', 'buy', ((math.floor(income/float(price['info']['price'])*10000))/10000)*1000, float(price['info']['price'])*1.0003, {'leverage': 5})
                                 amount = (math.floor(income/float(price['info']['price'])*10000)/10000)*1000
                                 halfsies = (math.floor((0.5*income)/float(price['info']['price'])*10000)/10000)*1000
                                 
@@ -148,7 +155,7 @@ while counter == 20:
                                 time.sleep(10)
                                 price = ku.fetchTicker(symbol)
                                 time.sleep(30)
-                                order = ku.createOrder(symbol, 'limit', 'sell', (math.floor((income/float(price['info']['price']))*1000)/1000)*100, float(price['info']['price'])*1.0003, {'leverage': 5})
+                                order = ku.createOrder(symbol, 'limit', 'buy', (math.floor((income/float(price['info']['price']))*1000)/1000)*100, float(price['info']['price'])*1.0003, {'leverage': 5})
                                 amount = (math.floor((income/float(price['info']['price']))*1000)/1000)*100
                                 halfsies = (math.floor((0.5*income)/float(price['info']['price'])*1000)/1000)*100
                                 # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*1000)/1000)*100, None, {'stopPrice': 0.98*price, 'leverage': 5})
@@ -157,7 +164,7 @@ while counter == 20:
                                 time.sleep(10)
                                 price = ku.fetchTicker(symbol)
                                 time.sleep(30)
-                                order = ku.createOrder(symbol, 'limit', 'sell', (math.floor(income/float(price['info']['price'])*100)/100)*10, float(price['info']['price'])*1.0003, {'leverage': 5})
+                                order = ku.createOrder(symbol, 'limit', 'buy', (math.floor(income/float(price['info']['price'])*100)/100)*10, float(price['info']['price'])*1.0003, {'leverage': 5})
                                 amount = (math.floor(income/float(price['info']['price'])*100)/100)*10
                                 halfsies = (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10
                                 # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 0.98*price,'leverage': 5})
@@ -166,7 +173,7 @@ while counter == 20:
                                 time.sleep(10)
                                 price = ku.fetchTicker(symbol)
                                 time.sleep(30)
-                                order = ku.createOrder(symbol, 'limit', 'sell', (math.floor((income/float(price['info']['price']))))/10, float(price['info']['price'])*1.0003, {'leverage': 5})
+                                order = ku.createOrder(symbol, 'limit', 'buy', (math.floor((income/float(price['info']['price']))))/10, float(price['info']['price'])*1.0003, {'leverage': 5})
                                 amount = (math.floor((income/float(price['info']['price']))))/10
                                 halfsies = (math.floor(((0.5*income)/float(price['info']['price']))))/10
                                 # sl = ku.create_order(symbol, 'market', 'sell', (math.floor(((0.5*income)/price['info']['price'])))/10, None, {'stopPrice': 0.98*price,'leverage': 5})
@@ -175,7 +182,7 @@ while counter == 20:
                                 time.sleep(10)
                                 price = ku.fetchTicker(symbol)
                                 time.sleep(30)
-                                order = ku.createOrder(symbol, 'limit', 'sell', (math.floor((income/float(price['info']['price']))))/10, float(price['info']['price'])*1.0003, {'leverage': 5})
+                                order = ku.createOrder(symbol, 'limit', 'buy', (math.floor((income/float(price['info']['price']))))/10, float(price['info']['price'])*1.0003, {'leverage': 5})
                                 amount = (math.floor((income/float(price['info']['price']))))/10
                                 halfsies = (math.floor(((0.5*income)/float(price['info']['price']))))/10
                                 # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 0.98*price,'leverage': 5})
@@ -184,7 +191,7 @@ while counter == 20:
                                 time.sleep(10)
                                 price = ku.fetchTicker(symbol)
                                 time.sleep(30)
-                                order = ku.createOrder(symbol, 'limit', 'sell', (math.floor((income/float(price['info']['price']))))/10, float(price['info']['price'])*1.0003, {'leverage': 5})
+                                order = ku.createOrder(symbol, 'limit', 'buy', (math.floor((income/float(price['info']['price']))))/10, float(price['info']['price'])*1.0003, {'leverage': 5})
                                 amount = (math.floor((income/float(price['info']['price']))))/10
                                 halfsies = (math.floor(((0.5*income)/float(price['info']['price']))))/10
                                 # sl = ku.create_order(symbol, 'market', 'sell', (math.floor(((0.5*income)/price['info']['price'])))/10, None, {'stopPrice': 0.98*price,'leverage': 5})
@@ -194,7 +201,7 @@ while counter == 20:
                                 time.sleep(10)
                                 price = ku.fetchTicker(symbol)
                                 time.sleep(30)
-                                order = ku.createOrder(symbol, 'limit', 'sell', (math.floor(income/float(price['info']['price'])*1000)/1000)*100, float(price['info']['price'])*1.0003, {'leverage': 5})
+                                order = ku.createOrder(symbol, 'limit', 'buy', (math.floor(income/float(price['info']['price'])*1000)/1000)*100, float(price['info']['price'])*1.0003, {'leverage': 5})
                                 amount = (math.floor(income/float(price['info']['price'])*1000)/1000)*100
                                 halfsies = (math.floor((0.5*income)/float(price['info']['price'])*1000)/1000)*100
                                 # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*1000)/1000)*100, None, {'stopPrice': 0.98*price,'leverage': 5})
@@ -203,7 +210,7 @@ while counter == 20:
                                 time.sleep(10)
                                 price = ku.fetchTicker(symbol)
                                 time.sleep(30)
-                                order = ku.createOrder(symbol, 'limit', 'sell', (math.floor(income/float(price['info']['price'])*100)/100)*10, float(price['info']['price'])*1.0003, {'leverage': 5})
+                                order = ku.createOrder(symbol, 'limit', 'buy', (math.floor(income/float(price['info']['price'])*100)/100)*10, float(price['info']['price'])*1.0003, {'leverage': 5})
                                 amount = (math.floor(income/float(price['info']['price'])*100)/100)*10
                                 halfsies = (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10
                                 # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 0.98*price,'leverage': 5})
@@ -213,7 +220,7 @@ while counter == 20:
                                 time.sleep(10)
                                 price = ku.fetchTicker(symbol)
                                 time.sleep(30)
-                                order = ku.createOrder(symbol, 'limit', 'sell', (math.floor(income/float(price['info']['price'])*100)/100)*10, float(price['info']['price'])*1.0003, {'leverage': 5})
+                                order = ku.createOrder(symbol, 'limit', 'buy', (math.floor(income/float(price['info']['price'])*100)/100)*10, float(price['info']['price'])*1.0003, {'leverage': 5})
                                 amount = (math.floor(income/float(price['info']['price'])*100)/100)*10
                                 halfsies = (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10
                                 # sl = ku.create_order(symbol, 'market', 'sell', (math.floor((0.5*income)/float(price['info']['price'])*100)/100)*10, None, {'stopPrice': 0.98*price,'leverage': 5})
@@ -223,7 +230,7 @@ while counter == 20:
                             send("manual trade it")
                             time.sleep(25)
                     position = True
-                    file = open('jsonshort.json', 'w+')
+                    file = open('jsondump.json', 'w+')
                     buydata = { "contract": symbol, "amount": amount, "halfsies": halfsies, "price": price, "time": datetime.now(), "higher": higher.iloc[-1]}
                     json.dump(buydata, file, default = str)
                     time.sleep(15)
@@ -232,7 +239,7 @@ while counter == 20:
                     secondtp = 0
                     while firsttp<1:
                         try:
-                            takeprofitorder = ku.createOrder(symbol, "limit", "buy", halfsies, 1.018*float(price["info"]["price"]), {'leverage': 5})
+                            takeprofitorder = ku.createOrder(symbol, "limit", "sell", halfsies, 1.018*float(price["info"]["price"]), {'leverage': 5})
                             firsttp+=1
                             time.sleep(20)
                             send("First tp Worked!!")
@@ -263,7 +270,7 @@ while counter == 20:
 
     elif position == True:
         if position == True:
-            file = open('jsonshort.json', 'r')
+            file = open('jsondump.json', 'r')
             filedump = json.load(file)
             contract = filedump["contract"]
             amount = filedump["amount"]
@@ -294,24 +301,24 @@ while counter == 20:
             smaresult = sma.iloc[-1]
             price = ku.fetchTicker(contract)
             
-            
-            if float(price['info']['price'])/1.00875 > entryprice:
+            if float(price['info']['price']) * 1.01 < float(entryprice["info"]["price"]):
                 stopordersellvariable = 0
                 while stopordersellvariable < 1:
                     try:
-                        send("Closing Short Stop order")
+                        send("Selling Stop order")
                         canceled = ku.cancel_order(takeprofitorder['id'], takeprofitorder['symbol'])
                         time.sleep(20)
-                        stopsellorder = ku.createOrder(contract, 'limit', 'buy', amount-halfsies, float(price['info']['price'])*.9997, {'leverage': 5})
+                        stopsellorder = ku.createOrder(contract, 'limit', 'sell', amount-halfsies, float(price['info']['price'])*.9997, {'leverage': 5})
                         stopordersellvariable +=1
                         time.sleep(20)
-                        file = open('jsonshort.json', 'w+')
+                        file = open('jsondump.json', 'w+')
                         data = { "contract": "none", "amount": 0, "halfsies": 0}
                         json.dump(data, file)
                         time.sleep(15)
-                        file = open('jsonshort.json', 'w+')
+                        file = open('jsondump.json', 'w+')
                         data = { "contract": "none", "amount": 0, "halfsies": 0}
                         json.dump(data, file)
+                        position = False
                         break
                     except:
                         pass
@@ -322,7 +329,7 @@ while counter == 20:
                     while stoptptwo <1:
                         time.sleep(10)                      
                         try:
-                            stopsellordertoo = ku.createOrder(contract, 'limit', 'buy', halfsies, float(price['info']['price'])*0.9997, {'leverage': 5})
+                            stopsellordertoo = ku.createOrder(contract, 'limit', 'sell', halfsies, float(price['info']['price'])*0.9997, {'leverage': 5})
                             sellsecond+=1
                         except:
                             time.sleep(30)
@@ -348,14 +355,15 @@ while counter == 20:
             #     if ku.fetchBalance()["info"]["data"]["positionMargin"] > 1:
             #         sellorder = ku.createOrder(contract, 'limit', 'sell', halfsies, float(price['info']['price'])*.9997, {'leverage': 5})
 
-            elif (opener.iloc[-1] > closer.iloc[-1] and opener.iloc[-2] > closer.iloc[-2] and buyinhigh != higher.iloc[-1] and buyinhigh != higher.iloc[-2]):
-                send("Closing Short 2 ups")
+            elif ((opener.iloc[-1] < closer.iloc[-1] and opener.iloc[-2] < closer.iloc[-2] and buyinhigh != higher.iloc[-1] and buyinhigh != higher.iloc[-2]) and position==True):
+                position = False
+                send("Selling 2 downs")
                 price = ku.fetchTicker(contract)
                 time.sleep(10)
                 notmovementstop = 0
                 while nomovementstop < 1:
                     try:
-                        sellorder = ku.createOrder(contract, 'limit', 'buy', amount-halfsies, float(price['info']['price'])*.9997, {'leverage': 5})
+                        sellorder = ku.createOrder(contract, 'limit', 'sell', amount-halfsies, float(price['info']['price'])*.9997, {'leverage': 5})
                         guacamole=1
                         nomovementstop +=1
                     except:
@@ -369,20 +377,23 @@ while counter == 20:
                         try:
                             price = ku.fetchTicker(contract)
                             time.sleep(10)
-                            sellorder = ku.createOrder(contract, 'limit', 'buy', halfsies, float(price['info']['price'])*.9997, {'leverage': 5})
+                            sellorder = ku.createOrder(contract, 'limit', 'sell', halfsies, float(price['info']['price'])*.9997, {'leverage': 5})
                             nomovementstophalfsies+=1
                         except:
                             time.sleep(25)
                             price = ku.fetchTicker(contract)
                             time.sleep(10)
+                file = open('jsondump.json', 'w+')
+                data = { "contract": "none", "amount": 0, "halfsies": 0}
+                json.dump(data, file)
 
 
 
 
-            elif thirdresult.iloc[-1] > fourthresult.iloc[-1]:
+            elif thirdresult.iloc[-1] < fourthresult.iloc[-1] and position==True:
                 price = ku.fetchTicker(contract)
                 time.sleep(25)
-                send(f'Exiting Short on {contract} cuz of MACD!')
+                send(f'Exiting Long on {contract} cuz of MACD!')
                 caca = 0
                 caca2 = 0
                 while caca<1:
@@ -396,7 +407,7 @@ while counter == 20:
                 guacamole = 0
                 while guacamole<1:
                     try:
-                        sellorder = ku.createOrder(contract, 'limit', 'buy', amount-halfsies, float(price['info']['price'])*.9997, {'leverage': 5})
+                        sellorder = ku.createOrder(contract, 'limit', 'sell', amount-halfsies, float(price['info']['price'])*.9997, {'leverage': 5})
                         guacamole=1
                     except:
                         time.sleep(25)
@@ -406,12 +417,12 @@ while counter == 20:
 
                 time.sleep(15)
                 if ku.fetchBalance()["info"]["data"]["positionMargin"] > 1:
-                    send(f'Trying to exit halfsies on {contract}')
+                    send(f'Trying to sell of halfsies on {contract}')
                     sellsecond = 0
                     price = ku.fetchTicker(contract)
                     while sellsecond<1:
                         try:
-                            sellordertoo = ku.createOrder(contract, 'limit', 'buy', halfsies, float(price['info']['price'])*0.9997, {'leverage': 5})
+                            sellordertoo = ku.createOrder(contract, 'limit', 'sell', halfsies, float(price['info']['price'])*0.9997, {'leverage': 5})
                             sellsecond+=1
                         except:
                             time.sleep(30)
@@ -419,7 +430,7 @@ while counter == 20:
                 else:
                     pass
                 time.sleep(15)
-                file = open('jsonshort.json', 'w+')
+                file = open('jsondump.json', 'w+')
                 data = { "contract": "none", "amount": 0, "halfsies": 0}
                 json.dump(data, file)
                 break
@@ -428,3 +439,7 @@ while counter == 20:
                 print(thirdresult.iloc[-1])
                 print(fourthresult.iloc[-1])
                 time.sleep(120)
+
+
+
+
