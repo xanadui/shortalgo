@@ -28,13 +28,13 @@ ku = ccxt.kucoinfutures({
     "password":'Krish005'
 });
 
-# file = open('jsondump.json', 'w+')
+# file = open('jsonshort.json', 'w+')
 # data = { "contract": "none", "amount": 0, "halfsies": 0}
 # json.dump(data, file)
 
 counter = 20
 while counter == 20:
-    file = open('jsondump.json', 'r')
+    file = open('jsonshort.json', 'r')
     filedump = json.load(file)
     if filedump["amount"] == 0:
         position = False
@@ -230,7 +230,7 @@ while counter == 20:
                             send("manual trade it")
                             time.sleep(25)
                     position = True
-                    file = open('jsondump.json', 'w+')
+                    file = open('jsonshort.json', 'w+')
                     buydata = { "contract": symbol, "amount": amount, "halfsies": halfsies, "price": price, "time": datetime.now(), "higher": higher.iloc[-1]}
                     json.dump(buydata, file, default = str)
                     time.sleep(15)
@@ -270,7 +270,7 @@ while counter == 20:
 
     elif position == True:
         if position == True:
-            file = open('jsondump.json', 'r')
+            file = open('jsonshort.json', 'r')
             filedump = json.load(file)
             contract = filedump["contract"]
             amount = filedump["amount"]
@@ -311,11 +311,11 @@ while counter == 20:
                         stopsellorder = ku.createOrder(contract, 'limit', 'sell', amount-halfsies, float(price['info']['price'])*.9997, {'leverage': 5})
                         stopordersellvariable +=1
                         time.sleep(20)
-                        file = open('jsondump.json', 'w+')
+                        file = open('jsonshort.json', 'w+')
                         data = { "contract": "none", "amount": 0, "halfsies": 0}
                         json.dump(data, file)
                         time.sleep(15)
-                        file = open('jsondump.json', 'w+')
+                        file = open('jsonshort.json', 'w+')
                         data = { "contract": "none", "amount": 0, "halfsies": 0}
                         json.dump(data, file)
                         position = False
@@ -383,7 +383,7 @@ while counter == 20:
                             time.sleep(25)
                             price = ku.fetchTicker(contract)
                             time.sleep(10)
-                file = open('jsondump.json', 'w+')
+                file = open('jsonshort.json', 'w+')
                 data = { "contract": "none", "amount": 0, "halfsies": 0}
                 json.dump(data, file)
 
@@ -430,7 +430,7 @@ while counter == 20:
                 else:
                     pass
                 time.sleep(15)
-                file = open('jsondump.json', 'w+')
+                file = open('jsonshort.json', 'w+')
                 data = { "contract": "none", "amount": 0, "halfsies": 0}
                 json.dump(data, file)
                 break
