@@ -23,8 +23,8 @@ def send(text):
 
 ku = ccxt.kucoinfutures({
     'adjustForTimeDifference': True,
-    "apiKey": '632f830fea6f8800017b6b14',
-    "secret": 'e4262128-8641-4498-a267-e696b05c6964',
+    "apiKey": '633054c847df220001d99764',
+    "secret": 'aaf9fd98-6ee1-489a-8461-cb8137ec2544',
     "password":'Krish005'
 });
 
@@ -79,7 +79,7 @@ while counter == 20:
                 secondresult = y-z
                 thirdresult = secondresult
                 fourthresult = thirdresult[:-1]
-                smaresult = sma.iloc[-1]
+                smaresult = ta.trend.SMAIndicator(close=closer, window=40).sma_indicator()
                 hundredsma = ta.trend.SMAIndicator(close=closer, window=100).sma_indicator()
                 characters = '/USDT:USDT'
                 if symbol=='BTC/USDT:USDT':
@@ -103,22 +103,24 @@ while counter == 20:
                 xxx=0
                 if thirdresult.iloc[-1] < fourthresult.iloc[-1]:
                     xxx+=1
-                if (hundredsma.iloc[-1] > lower.iloc[-1]):
+                if (smaresult.iloc[-1] > lower.iloc[-1]):
                     xxx+=1
-                if (hundredsma.iloc[-1] < higher.iloc[-1]):
+                if (smaresult.iloc[-1] < higher.iloc[-1]):
                     xxx+=1
-                if hundredsma.iloc[-2] < higher.iloc[-2] and hundredsma.iloc[-2] > lower.iloc[-2] and hundredsma.iloc[-3] > higher.iloc[-3] and hundredsma.iloc[-3] < lower.iloc[-3] and hundredsma.iloc[-4] < higher.iloc[-4] and hundredsma.iloc[-4] > lower.iloc[-4]:
+                if smaresult.iloc[-2] < higher.iloc[-2] and smaresult.iloc[-2] > lower.iloc[-2] and smaresult.iloc[-3] > higher.iloc[-3] and smaresult.iloc[-3] < lower.iloc[-3] and smaresult.iloc[-4] < higher.iloc[-4] and smaresult.iloc[-4] > lower.iloc[-4]:
                     xxx-=1
                 if ku.fetchBalance()['info']['data']['positionMargin'] < 2:
                     time.sleep(3)
                     xxx+=1
-                if float(hundredsma.iloc[-1])*.9995 < float(hundredsma.iloc[-2]):
+                if float(smaresult.iloc[-1]) > float(smaresult.iloc[-2]):
+                    xxx+=1
+                if float(hundredsma.iloc[-1]) > float(hundredsma.iloc[-2]):
                     xxx+=1
                 if lower.iloc[-1]*1.015>=closer.iloc[-1] or lower.iloc[-1]*1.015>=opener.iloc[-1]:
                     xxx+=1
                 if (higher.iloc[-1]/1.015)<=closer.iloc[-1] or (higher.iloc[-1]/1.015)<=opener.iloc[-1]:
                     xxx+=1
-                if xxx==7:
+                if xxx==8:
                     print(f'SHORTSHORTSHORT {symbol}')
                     send(f'SHORT {symbol}!')
                     firstrestultbuy = secondresult.iloc[-1]
